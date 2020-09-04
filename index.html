@@ -1,0 +1,44 @@
+  
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="description" content="Cek Provider Nomor Telpon">
+        <meta name="keywords" content="Carrier, Provider, Phone">
+        <meta name="author" content="Achmad Rivaldi">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Cek Provider Nomor Telpon</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous"/>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    </head>
+    <body>
+        
+    <div class="container">
+        <h3 class="text-center mb-3">Cek Provider Nomor Telpon</h3>
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Nomor Telpon</label>
+            <input type="text" class="form-control" id="inputNomor" />
+        </div>
+        <div class="text-center"><button onclick="onSubmit()" type="button" class="btn btn-primary btn-lg">Check</button></div>
+        <div class="mt-5" id="resultnya"></div>
+    </div>
+    </body>
+    </html>
+
+    <script>
+        function onSubmit(){
+            let dataPhone = document.getElementById("inputNomor").value;
+            
+            fetch('check.php?phone='+ dataPhone, {
+            method: 'GET',
+            })
+            .then(response => response.json())
+            .then(data => {
+            console.log('Success:', data);
+            swal(data.carrier,dataPhone);
+            })
+            .catch((error) => {
+            console.error('Error:', error);
+            });
+            
+        }
+    </script>
